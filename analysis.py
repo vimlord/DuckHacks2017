@@ -3,6 +3,8 @@ from sklearn.neural_network import MLPClassifier
 from sklearn.neural_network import MLPRegressor
 from sklearn import datasets, linear_model
 
+import cPickle
+
 from emotion import imageRequest
 
 # Returns a classifier that analyzes the correlation between data.
@@ -24,7 +26,15 @@ def parseEmotion(data):
 def makePrediction(clf, vec):
     return clf.predict([vec])[0]
 
-def __christest():
+def saveClassifier(filename, clf):
+    with open(filename, 'wb') as fid:
+        cPickle.dump(clf, fid)
+
+def loadClassifier(filename):
+    with open(filename, 'rb') as fid:
+        return cPickle.load(fid)
+
+def christest():
     X = [[0,1,0,0,0,0,0,0]] * 6 + [[0,0,0,1,0,0,0,0]] * 6 + [[0,0,0,0,0,0,1,0]] * 6
     Y = [
         [0,0,1],
@@ -46,7 +56,9 @@ def __christest():
         [1,0,0],
         [1,0,0]
     ]
-
+    return (X, Y)
+    
+    """
     print(str(len(X)) + " inputs")
     print(str(len(Y)) + " outputs")
     clf = trainOnData([(X[i], Y[i]) for i in range(len(Y))])
@@ -54,4 +66,5 @@ def __christest():
     emote = imageRequest('/home/chrishittner/Desktop/sample.jpg')
     print(emote)
     print(makePrediction(clf, parseEmotion(emote)))
+    """
 
