@@ -8,7 +8,7 @@ def search(keyword):
     temp = driver.find_element_by_class_name('SearchField__placeholder')
     temp.click()
     search_bar = driver.find_element_by_class_name('SearchField__input')
-    search_bar.send_keys(keyword + " music playlist")
+    search_bar.send_keys(keyword)
     search_bar.send_keys(Keys.ENTER)
 
     time.sleep(3000)
