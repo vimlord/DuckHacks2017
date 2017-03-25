@@ -35,7 +35,10 @@ def runCycle(prevState):
             choice = i
 
     # Play the requested genre
-    search(genres[choice])
+    if prevState != genres[choice]:
+        search(genres[choice])
+
+    return genres[choice]
 
 
 
