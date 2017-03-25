@@ -15,5 +15,3 @@ def search(keyword):
     time.sleep()
     driver.quit()
 
-
-search("rock")
