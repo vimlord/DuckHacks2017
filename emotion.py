@@ -17,7 +17,7 @@ _url = 'https://westus.api.cognitive.microsoft.com/emotion/v1.0/recognize'
 _key = '2cf0098356e243dcaeffefe42307109a'
 _maxNumRetries = 10
 
-print("Requesting to " + _url)
+print("Requests for emotion data will be made to " + _url)
 print("Key is " + _key)
 
 def processRequest( json, data, headers, params ):
@@ -94,7 +94,7 @@ def renderResultOnImage( result, img ):
 
 def imageRequest(url):
     # Load raw image file into memory
-    pathToFileInDisk = '/home/chrishittner/Desktop/sample.jpg'
+    pathToFileInDisk = url
     with open( pathToFileInDisk, 'rb' ) as f:
         data = f.read()
 
@@ -108,17 +108,5 @@ def imageRequest(url):
     return processRequest( json, data, headers, params )
 
 #print(imageRequest('/home/chrishittner/Desktop/sample.jpg'))
-
-"""
-if result is not None:
-    # Load the original image, fetched from the URL
-    arr = np.asarray( bytearray( requests.get( urlImage ).content ), dtype=np.uint8 )
-    img = cv2.cvtColor( cv2.imdecode( arr, -1 ), cv2.COLOR_BGR2RGB )
-
-    renderResultOnImage( result, img )
-
-    ig, ax = plt.subplots(figsize=(15, 20))
-    ax.imshow( img )
-"""
 
 
