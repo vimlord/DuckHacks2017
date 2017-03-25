@@ -5,13 +5,14 @@ import time
 def search(keyword):
     driver = webdriver.Chrome()
     driver.get('http://www.pandora.com/')
-    search_bar = driver.find_element_by_id('masthead-search-term')
+    temp = driver.find_element_by_class_name('SearchField__placeholder')
+    temp.click()
+    search_bar = driver.find_element_by_class_name('SearchField__input')
     search_bar.send_keys(keyword + " music playlist")
     search_bar.send_keys(Keys.ENTER)
-    links = driver.find_elements_by_xpath('//*[@href]')
-    links.click()
+
     time.sleep(3000)
-    #driver.quit()
+    driver.quit()
 
 
 search("happy")
