@@ -9,6 +9,7 @@ from picture import *
 import os
 import os.path
 import time
+import random
 
 # The list of currently supported genres
 genres = [
@@ -59,6 +60,11 @@ def runCycle(prevState):
     print("Choice vector computed.")
     for i in range(len(pred)):
         print(genres[i] + ": " + str(pred[i]))
+    
+    # Introduce a small random variability to each value.
+    # Remove if bad results are received.
+    for i in range(len(genres)):
+        pred[i] += random.random() * 0.03
 
     # Choose the dimension with the highest value.
     choice = 0
