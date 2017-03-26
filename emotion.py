@@ -1,6 +1,3 @@
-from __future__ import print_function
-
-print("Setting up imports...")
 
 import time 
 import requests
@@ -28,9 +25,6 @@ emotions = [
 _url = 'https://westus.api.cognitive.microsoft.com/emotion/v1.0/recognize'
 _key = '2cf0098356e243dcaeffefe42307109a'
 _maxNumRetries = 10
-
-print("Requests for emotion data will be made to " + _url)
-print("Key is " + _key)
 
 def processRequest( json, data, headers, params ):
 
