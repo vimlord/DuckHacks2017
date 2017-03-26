@@ -22,5 +22,4 @@ def search(keyword):
     search_bar.send_keys(Keys.ENTER)
 
     time.sleep(10)
-    
 
