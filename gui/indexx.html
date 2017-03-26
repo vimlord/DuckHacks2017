@@ -1,20 +1,4 @@
-from selenium import webdriver
-import math
 
-isopen = 0
-def init():
-    global isopen
-    if isopen == False:
-        global driver
-        driver = webdriver.Chrome()
-        driver.get("file:///Users/TaylorHe/Desktop/DuckHacks2017/gui/indexx.html")
-        isopen = True
-
-
-def updateGUI(emote_val, emote, genre):
-    init()
-    htmlfile = open('./gui/indexx.html', 'w')
-    htmltext = """
     <!DOCTYPE html>
     <html lang="en">
     <head>
@@ -44,8 +28,8 @@ def updateGUI(emote_val, emote, genre):
     <div class="carousel-inner">
     <div class="item active" style="background-image: url(images/slider/1.png); background-position: center; background-size: cover">
     <div class="caption">
-    <h1 class="animated fadeInLeftBig">You're <span>""" + str(math.trunc(emote_val * 100)) + """%</span> """ + emote + """</h1>
-    <p class="animated fadeInRightBig">We're playing some """ + genre + """</p>
+    <h1 class="animated fadeInLeftBig">You're <span>96%</span> neutral</h1>
+    <p class="animated fadeInRightBig">We're playing some classic rock</p>
     </div>
     </div>
     </div>
@@ -55,8 +39,4 @@ def updateGUI(emote_val, emote, genre):
     <script type="text/javascript" src="js/main.js"></script>
     </body>
     </html>
-    """
-    htmlfile.write(htmltext)
-    htmlfile.close()
-    global driver
-    driver.get('file:///Users/TaylorHe/Desktop/DuckHacks2017/gui/indexx.html')
+    

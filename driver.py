@@ -5,6 +5,7 @@ from analysis import *
 # Song player module
 from youtube import *
 from picture import *
+from gui import *
 
 import os
 import os.path
@@ -95,12 +96,15 @@ def runCycle(prevEmo, prevState):
     if prevState != genres[choice]:
         print("Will play " + genres[choice])
         search(genres[choice])
+        updateGUI(vec[emotions.index(domEmo)], domEmo, genres[choice])
+    # update The GUI
 
     return (domEmo, genres[choice])
 
 if __name__ == '__main__':
     prevType = ''
     prevEmo = ''
+    
     while True:
         pair = runCycle(prevEmo, prevType)
         prevEmo = pair[0]
