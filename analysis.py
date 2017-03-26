@@ -20,7 +20,14 @@ def trainOnData(data):
 
 # Parses emotion from the return value of the Microsoft Emotion API.
 def parseEmotion(data):
-    return [data[0]['scores'][em] for em in emotions]
+    best = 0
+    for i in range(1, len(data)):
+        if data[i]['faceRectangle']['width'] > data[best]['faceRectangle']['width']:
+            best = i
+
+    print("Target face is number " + str(best + 1) + " of " + str(len(data)))
+
+    return [data[best]['scores'][em] for em in emotions]
 
 # Makes a prediction about a vector based on a classifier.
 def makePrediction(clf, vec):
