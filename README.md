@@ -8,7 +8,7 @@ Our submission is an emotion-driven music selection program. It uses Microsoft's
 
 ## How do I use it?
 
-To use it, there are several dependencies that need to be installed. These include `pygame`, `scikit-learn`, and `chromium`. The program itself can be run by downloading the source and running `driver.py` using Python 2.
+To use it, there are several dependencies that need to be installed. These include `pygame`, `scikit-learn`, `selenium`, `opencv`, and `chromium`. The program itself can be run by downloading the source and running `driver.py` using Python 2. The current version only works on Mac OSX, but can be adapted to work on Linux with some modifications.
 
 ## Collaborators
 This project was developed by the following:
