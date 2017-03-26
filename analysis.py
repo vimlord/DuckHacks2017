@@ -34,7 +34,7 @@ def loadClassifier(filename):
     with open(filename, 'rb') as fid:
         return cPickle.load(fid)
 
-def christest():
+def rebuildClassifier():
     # Input is [sad, happy, disgust, anger, surprise, fear, neutral, contempt]
     # Output is [rap, hardrock, metal, classical, jazz, pop, classrock, edm, country]
     X = [
@@ -52,15 +52,6 @@ def christest():
         
     ]
     
-    return (X, Y)
-    
-    """
-    print(str(len(X)) + " inputs")
-    print(str(len(Y)) + " outputs")
     clf = trainOnData([(X[i], Y[i]) for i in range(len(Y))])
-
-    emote = imageRequest('/home/chrishittner/Desktop/sample.jpg')
-    print(emote)
-    print(makePrediction(clf, parseEmotion(emote)))
-    """
+    saveClassifier('./classifier.pkl', clf)
 

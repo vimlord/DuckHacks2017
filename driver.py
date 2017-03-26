@@ -63,7 +63,8 @@ def runCycle(prevState):
 
 if __name__ == '__main__':
     runCycle('hi')
-
+else:
+    rebuildClassifier()
 
 
 
