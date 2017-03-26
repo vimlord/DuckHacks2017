@@ -8,6 +8,18 @@ import cv2
 import operator
 import numpy as np
 
+# The emotion list
+emotions = [
+    'sadness',
+    'happiness',
+    'disgust',
+    'anger',
+    'surprise',
+    'fear',
+    'neutral',
+    'contempt'
+]
+
 # Import library to display results
 # Display images within Jupyter
 

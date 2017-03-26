@@ -5,7 +5,7 @@ from sklearn import datasets, linear_model
 
 import cPickle
 
-from emotion import imageRequest
+from emotion import *
 
 # Returns a classifier that analyzes the correlation between data.
 def trainOnData(data):
@@ -20,7 +20,7 @@ def trainOnData(data):
 
 # Parses emotion from the return value of the Microsoft Emotion API.
 def parseEmotion(data):
-    return data[0]['scores'].values()
+    return [data[0]['scores'][em] for em in emotions]
 
 # Makes a prediction about a vector based on a classifier.
 def makePrediction(clf, vec):
@@ -35,27 +35,23 @@ def loadClassifier(filename):
         return cPickle.load(fid)
 
 def christest():
-    X = [[0,1,0,0,0,0,0,0]] * 6 + [[0,0,0,1,0,0,0,0]] * 6 + [[0,0,0,0,0,0,1,0]] * 6
-    Y = [
-        [0,0,1],
-        [0,0,1],
-        [0,0,1],
-        [1,0,0],
-        [1,0,0],
-        [1,0,0],
-        [0,1,1],
-        [0,1,0],
-        [0,1,0],
-        [0,1,1],
-        [0,1,0],
-        [0,1,0],
-        [0,0,1],
-        [0,0,1],
-        [0,0,1],
-        [0,1,0],
-        [1,0,0],
-        [1,0,0]
+    # Input is [sad, happy, disgust, anger, surprise, fear, neutral, contempt]
+    # Output is [rap, hardrock, metal, classical, jazz, pop, classrock, edm, country]
+    X = [
+        [1, 0, 0, 0, 0, 0, 0, 0], # Sad
+        [0, 1, 0, 0, 0, 0, 0, 0], # Happy
+        [0, 0, 0, 1, 0, 0, 0, 0], # Angry
+        [0, 0, 0, 0, 0, 0, 1, 0]  # Neutral
     ]
+
+    Y = [
+        [0, 0, 0, 1, 1, 0, 0, 0, 1], # Sad
+        [0, 0, 0, 0, 0, 1, 1, 1, 0], # Happy
+        [1, 1, 1, 0, 0, 0, 0, 0, 0], # Angry
+        [0, 0, 0, 0, 0, 0, 1, 1, 1]
+        
+    ]
+    
     return (X, Y)
     
     """
