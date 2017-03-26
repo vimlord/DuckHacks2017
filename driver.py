@@ -24,10 +24,17 @@ genres = [
     'country'
 ]
 
+subemo = [
+    'happiness',
+    'sadness',
+    'anger',
+    'neutral'
+]
+
 
 clf = loadClassifier('./classifier.pkl')
 
-def runCycle(prevState):
+def runCycle(prevEmo, prevState):
     print("Beginning procedure...") 
 
     # Takes a selfie.
@@ -45,15 +52,28 @@ def runCycle(prevState):
     # Return if no faces
     if len(data) == 0:
         print('No faces detected')
-        return
+        return (prevEmo, prevState)
 
     # Gets the emotion vector from the image.
     vec = parseEmotion(data)
     print("Acquired sentiment.")
-    for i in range(len(vec)):
-        print(emotions[i] + ": " + str(vec[i]))
+
+    for i in range(len(subemo)):
+        print(subemo[i] + ": " + str(vec[emotions.index(subemo[i])]))
 
     print('')
+    
+    # Figure out if the dominant emotion changed
+    domEmo = subemo[0]
+    for i in range(1, len(subemo)):
+        if vec[emotions.index(domEmo)] < vec[emotions.index(subemo[i])]:
+            domEmo = subemo[i]
+
+    if prevEmo == domEmo:
+        print("Dominant mood unchanged")
+        return (prevEmo, prevState)
+    else:
+        print("Current dominant emotion is " + domEmo)
 
     # Computes the prediction.
     pred = makePrediction(clf, vec)
@@ -71,18 +91,23 @@ def runCycle(prevState):
     for i in range(1, len(genres)):
         if pred[i] > pred[choice]:
             choice = i
+
+    return (domEmo, genres[choice])
     
     # Play the requested genre
     if prevState != genres[choice]:
         print("Will play " + genres[choice])
         search(genres[choice])
 
-    return genres[choice]
+    return (domEmo, genres[choice])
 
 if __name__ == '__main__':
-    prev = ''
+    prevType = ''
+    prevEmo = ''
     while True:
-        runCycle(prev)
+        pair = runCycle(prevEmo, prevType)
+        prevEmo = pair[0]
+        prevType = pair[1]
         time.sleep(15)
 else:
     rebuildClassifier()
