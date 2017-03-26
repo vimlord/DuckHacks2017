@@ -36,24 +36,23 @@ subemo = [
 clf = loadClassifier('./classifier.pkl')
 
 def runCycle(prevEmo, prevState):
-    print("Beginning procedure...") 
+    print("Beginning procedure...")
 
     # Takes a selfie.
     picture()
     print("Snap!")
-    
+
     # Gets the emotion data for the selfie.
     data = imageRequest('./selfie.jpg')
     print("Scanned image.")
     print(data)
-    
+
     #if os.path.isfile('./selfie.jpg'):
     #    os.remove('./selfie.jpg') # Remove the old picture
 
     # Return if no faces
     if len(data) == 0:
         print('No faces detected')
-        updateGUI(vec[emotions.index(prevEmo)], prevEmo, prevState)
         return (prevEmo, prevState)
 
     # Gets the emotion vector from the image.
@@ -63,7 +62,7 @@ def runCycle(prevEmo, prevState):
         print(subemo[i] + ": " + str(vec[emotions.index(subemo[i])]))
 
     print('')
-    
+
     # Figure out if the dominant emotion changed
     domEmo = subemo[0]
     for i in range(1, len(subemo)):
@@ -82,7 +81,7 @@ def runCycle(prevEmo, prevState):
     print("Choice vector computed.")
     for i in range(len(pred)):
         print(genres[i] + ": " + str(pred[i]))
-    
+
     # Introduce a small random variability to each value.
     # Remove if bad results are received.
     for i in range(len(genres)):
@@ -97,8 +96,10 @@ def runCycle(prevEmo, prevState):
     # Play the requested genre
     if prevState != genres[choice]:
         print("Will play " + genres[choice])
-        updateGUI(vec[emotions.index(domEmo)], domEmo, genres[choice])
         search(genres[choice])
+    else:
+        print("Alreeady playing " + prevState)
+    updateGUI(vec[emotions.index(domEmo)], domEmo, genres[choice])
     # update The GUI
 
     return (domEmo, genres[choice])
@@ -106,7 +107,7 @@ def runCycle(prevEmo, prevState):
 if __name__ == '__main__':
     prevType = ''
     prevEmo = ''
-    
+
     while True:
         pair = runCycle(prevEmo, prevType)
         prevEmo = pair[0]
@@ -114,6 +115,3 @@ if __name__ == '__main__':
         time.sleep(15)
 else:
     rebuildClassifier()
-
-
-

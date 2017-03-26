@@ -1,19 +1,45 @@
 from selenium import webdriver
+from selenium import webdriver
+from selenium.webdriver.common.keys import Keys
+import time
 import math
 import os
 
+driver = 0
 isopen = 0
+guiopen = 0
+inpandoratab = True
+
 def init():
     global isopen
     if isopen == False:
         global driver
         driver = webdriver.Chrome()
-        driver.get('file://' + os.getcwd() + "/gui/indexx.html")
+        driver.get('http://www.pandora.com/')
         isopen = True
+        global inpandoratab
+        time.sleep(2.5)
 
+def search(keyword):
+    init()
+    global inpandoratab
+    if inpandoratab == False:
+        driver.switch_to_window(driver.window_handles[0])
+        time.sleep(2)
+    driver.find_element_by_class_name('SearchField__placeholder').click()
+    search_bar = driver.find_element_by_class_name('SearchField__input')
+    search_bar.send_keys(keyword)
+    time.sleep(1)
+    search_bar.send_keys(Keys.ENTER)
+    time.sleep(2)
 
 def updateGUI(emote_val, emote, genre):
-    init()
+    global guiopen
+    if guiopen == False:
+        newtab = driver.execute_script("window.open('');")
+        #driver.execute_script("window.open('https://www.google.com');")
+        driver.find_element_by_tag_name("body").send_keys(Keys.CONTROL + Keys.TAB)
+        guiopen = True
     htmlfile = open('./gui/indexx.html', 'w')
     htmltext = """
     <!DOCTYPE html>
@@ -27,19 +53,19 @@ def updateGUI(emote_val, emote, genre):
     <link href="css/main.css" rel="stylesheet">
     <link id="css-preset" href="css/presets/preset1.css" rel="stylesheet">
     <link href="css/responsive.css" rel="stylesheet">
-    
+
     <!--[if lt IE 9]>
     <script src="js/html5shiv.js"></script>
     <script src="js/respond.min.js"></script>
     <![endif]-->
-    
+
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700' rel='stylesheet' type='text/css'>
     <link rel="shortcut icon" href="images/favicon.ico">
     </head><!--/head-->
-    
+
     <body>
-    
-    
+
+
     <header id="home">
     <div id="home-slider" class="carousel slide carousel-fade" data-ride="carousel">
     <div class="carousel-inner">
@@ -50,7 +76,7 @@ def updateGUI(emote_val, emote, genre):
     </div>
     </div>
     </div>
-    
+
     <script type="text/javascript" src="js/jquery.js"></script>
     <script type="text/javascript" src="js/bootstrap.min.js"></script>
     <script type="text/javascript" src="js/main.js"></script>
@@ -59,5 +85,7 @@ def updateGUI(emote_val, emote, genre):
     """
     htmlfile.write(htmltext)
     htmlfile.close()
-    global driver
+    driver.switch_to_window(driver.window_handles[1])
+    global inpandoratab
+    inpandoratab = False
     driver.get('file://' + os.getcwd() + '/gui/indexx.html')
