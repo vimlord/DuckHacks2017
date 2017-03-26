@@ -14,7 +14,7 @@ import time
 genres = [
     'rap',
     'hard rock',
-    'metal',
+    'heavy metal',
     'classical',
     'jazz',
     'pop',
