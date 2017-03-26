@@ -53,6 +53,7 @@ def runCycle(prevEmo, prevState):
     # Return if no faces
     if len(data) == 0:
         print('No faces detected')
+        updateGUI(vec[emotions.index(prevEmo)], prevEmo, prevState)
         return (prevEmo, prevState)
 
     # Gets the emotion vector from the image.
@@ -71,6 +72,7 @@ def runCycle(prevEmo, prevState):
 
     if prevEmo == domEmo:
         print("Dominant mood unchanged")
+        updateGUI(vec[emotions.index(domEmo)], domEmo, prevState)
         return (prevEmo, prevState)
     else:
         print("Current dominant emotion is " + domEmo)
@@ -95,8 +97,8 @@ def runCycle(prevEmo, prevState):
     # Play the requested genre
     if prevState != genres[choice]:
         print("Will play " + genres[choice])
-        search(genres[choice])
         updateGUI(vec[emotions.index(domEmo)], domEmo, genres[choice])
+        search(genres[choice])
     # update The GUI
 
     return (domEmo, genres[choice])

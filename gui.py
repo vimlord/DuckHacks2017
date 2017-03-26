@@ -1,5 +1,6 @@
 from selenium import webdriver
 import math
+import os
 
 isopen = 0
 def init():
@@ -7,7 +8,7 @@ def init():
     if isopen == False:
         global driver
         driver = webdriver.Chrome()
-        driver.get("file:///Users/TaylorHe/Desktop/DuckHacks2017/gui/indexx.html")
+        driver.get('file://' + os.getcwd() + "/gui/indexx.html")
         isopen = True
 
 
@@ -59,4 +60,4 @@ def updateGUI(emote_val, emote, genre):
     htmlfile.write(htmltext)
     htmlfile.close()
     global driver
-    driver.get('file:///Users/TaylorHe/Desktop/DuckHacks2017/gui/indexx.html')
+    driver.get('file://' + os.getcwd() + '/gui/indexx.html')
