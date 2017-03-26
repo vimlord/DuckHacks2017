@@ -8,6 +8,7 @@ from picture import *
 
 import os
 import os.path
+import time
 
 # The list of currently supported genres
 genres = [
@@ -73,9 +74,10 @@ def runCycle(prevState):
     return genres[choice]
 
 if __name__ == '__main__':
+    prev = ''
     while True:
-        runCycle('hi')
-        sleep(15)
+        runCycle(prev)
+        time.sleep(15)
 else:
     rebuildClassifier()
 
