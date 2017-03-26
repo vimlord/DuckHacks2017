@@ -6,6 +6,9 @@ from analysis import *
 from youtube import *
 from picture import *
 
+import os
+import os.path
+
 # The list of currently supported genres
 genres = [
     'rap',
@@ -33,6 +36,14 @@ def runCycle(prevState):
     data = imageRequest('./selfie.jpg')
     print("Scanned image.")
     print(data)
+    
+    #if os.path.isfile('./selfie.jpg'):
+    #    os.remove('./selfie.jpg') # Remove the old picture
+
+    # Return if no faces
+    if len(data) == 0:
+        print('No faces detected')
+        return
 
     # Gets the emotion vector from the image.
     vec = parseEmotion(data)
@@ -62,7 +73,9 @@ def runCycle(prevState):
     return genres[choice]
 
 if __name__ == '__main__':
-    runCycle('hi')
+    while True:
+        runCycle('hi')
+        sleep(15)
 else:
     rebuildClassifier()
 
