@@ -35,7 +35,7 @@ subemo = [
 if not os.path.isfile('./classifier.pkl'):
     print("Building new classifier")
     rebuildClassifier()
-    
+
 
 clf = loadClassifier('./classifier.pkl')
 
@@ -51,8 +51,8 @@ def runCycle(prevEmo, prevState):
     print("Scanned image.")
     print(data)
 
-    #if os.path.isfile('./selfie.jpg'):
-    #    os.remove('./selfie.jpg') # Remove the old picture
+    if os.path.isfile('./selfie.jpg'):
+        os.remove('./selfie.jpg') # Remove the old picture
 
     # Return if no faces
     if len(data) == 0:
