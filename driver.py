@@ -4,7 +4,7 @@ from analysis import *
 
 # Song player module
 from youtube import *
-from camera import *
+from picture import *
 
 # The list of currently supported genres
 genres = ['pop', 'edm', 'rock']
