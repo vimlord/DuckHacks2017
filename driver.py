@@ -32,6 +32,10 @@ subemo = [
     'neutral'
 ]
 
+if not os.path.isfile('./classifier.pkl'):
+    print("Building new classifier")
+    rebuildClassifier()
+    
 
 clf = loadClassifier('./classifier.pkl')
 
