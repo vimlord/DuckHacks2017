@@ -23,6 +23,13 @@ genres = [
     'country'
 ]
 
+emsubset = [
+    'happiness',
+    'sadness',
+    'anger',
+    'neutral'
+]
+
 
 clf = loadClassifier('./classifier.pkl')
 
@@ -49,8 +56,8 @@ def runCycle(prevState):
     # Gets the emotion vector from the image.
     vec = parseEmotion(data)
     print("Acquired sentiment.")
-    for i in range(len(vec)):
-        print(emotions[i] + ": " + str(vec[i]))
+    for i in range(len(emsubset)):
+        print(emsubset[i] + ": " + str(vec[emotions.index(emsubset[i])]))
 
     print('')
 
