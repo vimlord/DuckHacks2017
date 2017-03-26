@@ -3,7 +3,6 @@ from emotion import *
 from analysis import *
 
 # Song player module
-from youtube import *
 from picture import *
 from gui import *
 
