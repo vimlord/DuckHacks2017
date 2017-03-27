@@ -1,10 +1,10 @@
 # DuckHacks 2017
 
-This repository contains the code for our submission to the DuckHacks 2017 Hackathon hosted by JPMorgan and Google.
+This repository contains the code for our submission to the DuckHacks 2017 Hackathon hosted by JPMorgan and Google, which won the prize for "Most Marketable".
 
 ## What is it?
 
-Our submission is an emotion-driven music selection program. It uses Microsoft's emotion API to analyze the emotion of a user and play music to match their mood.
+Our submission was an emotion-driven music selection program. It uses Microsoft's emotion API to analyze the emotion of a user and play music to match their mood. The emotion API requires the use of an image taken by the user's webcam every few seconds, which is deleted immediately after its use. After receiving the data, the application will access Pandora and play a genre of music that matches the user's mood.
 
 ## How do I use it?
 
